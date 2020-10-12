@@ -1,0 +1,44 @@
+.fern-tree {
+  border: 2px solid #eee;
+  border-radius: 20px;
+  padding: 0;
+  margin: 16px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.fern-tree canvas {
+  border-radius: 20px;
+  display: block;
+}
+
+.fern-tree-help {
+  position: absolute;
+  z-index: 1;
+  margin: 0;
+  font-family: Roboto;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 1s;
+}
+
+.fern-tree-error {
+  text-align: start;
+}
+
+.fern-tree-error p {
+  font-weight: bold;
+  color: #b00;
+}
+
+.fern-tree-error p,
+.fern-tree-error pre {
+  margin: 0;
+  padding: 0;
+}

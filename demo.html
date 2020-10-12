@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Demo</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+      WebFont.load({
+        google: {
+          families: ["Roboto"],
+        },
+      });
+    </script>
+    <script type="module">
+      import { renderAllTrees } from "./index.js";
+
+      window.addEventListener("load", () =>
+        renderAllTrees({
+          zoomable: true,
+          draggable: true,
+        })
+      );
+    </script>
+  </head>
+  <body>
+    <pre class="fern-tree">
+        ferns
+          --is-->
+            a
+              pretty = lightweight
+            tree
+            visualisation
+              -->
+                library
+    </pre>
+  </body>
+</html>
