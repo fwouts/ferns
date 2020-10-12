@@ -1,4 +1,4 @@
-import { DEFAULT_COLORS, TreeColors } from "../design/colors";
+import { TreeStyle, withDefaults } from "../design/style";
 import { render } from "../drawing/renderer";
 import { computeHeight } from "../drawing/tree";
 import { Viewport } from "../drawing/viewport/viewport";
@@ -15,7 +15,7 @@ export interface TreeRenderingOptions {
   draggable?: boolean;
   zoomable?: boolean;
   devicePixelRatio?: number;
-  colors?: TreeColors;
+  style?: Partial<TreeStyle>;
 }
 
 export function renderTreeElement(
@@ -38,7 +38,7 @@ async function renderTreeAsync(
   const zoomable = options.zoomable ?? false;
   const devicePixelRatio =
     options.devicePixelRatio || window.devicePixelRatio || 1;
-  const colors = options.colors || DEFAULT_COLORS;
+  const style = withDefaults(options.style);
   const canvas = document.createElement("canvas");
   const ctx = get2DContext(canvas);
   const treeHeight = Math.max(0, ...trees.map(computeHeight));
@@ -49,6 +49,7 @@ async function renderTreeAsync(
       maxWidth: options.maxWidth || container.getBoundingClientRect().width,
       maxHeight: options.maxHeight || treeHeight,
       expandHorizontally: true,
+      style,
     }
   );
   canvas.style.width = `${width}px`;
@@ -75,9 +76,9 @@ async function renderTreeAsync(
 
   function rerender(viewport: Viewport) {
     currentViewport = viewport;
-    ctx.fillStyle = colors.background;
+    ctx.fillStyle = style.colors.background;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    render(ctx, colors, viewport, trees);
+    render(ctx, style, viewport, trees);
   }
 }
 

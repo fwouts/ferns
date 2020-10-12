@@ -1,19 +1,18 @@
 import { ProjectedRenderingContext2D } from "../viewport/projected-context";
 
-const FONT = "Roboto";
-
 export function drawText(
   ctx: ProjectedRenderingContext2D,
   x: number,
   y: number,
   width: number,
   height: number,
+  fontFamily: string,
   fontSize: number,
   color: string,
   text: string
 ) {
   ctx.set({
-    font: [fontSize, FONT],
+    font: [fontSize, fontFamily],
     textAlign: "center",
     textBaseline: "middle",
     fillStyle: color,
@@ -23,9 +22,10 @@ export function drawText(
 
 export function measureText(
   ctx: CanvasRenderingContext2D,
+  fontFamily: string,
   fontSize: number,
   text: string
 ) {
-  ctx.font = `${fontSize}px ${FONT}`;
+  ctx.font = `${fontSize}px ${fontFamily}`;
   return ctx.measureText(text).width;
 }

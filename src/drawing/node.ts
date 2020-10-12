@@ -1,5 +1,6 @@
 import { Node } from "../data/tree-node";
-import { NodeColors } from "../design/colors";
+import { nodeColors } from "../design/colors";
+import { TreeStyle } from "../design/style";
 import { drawRectangle } from "./elements/rect";
 import { drawText, measureText } from "./elements/text";
 import { ProjectedRenderingContext2D } from "./viewport/projected-context";
@@ -18,13 +19,15 @@ const TEXT_HORIZONTAL_PADDING = 8;
  */
 export function drawNode(
   ctx: ProjectedRenderingContext2D,
-  colors: NodeColors,
+  style: TreeStyle,
   x: number,
   y: number,
   node: Node
 ): number {
+  const colors = nodeColors(style.colors, node);
   const [width, keysWidth, attributesWidth] = computeNodeWidth(
     ctx.rawContext,
+    style,
     node
   );
   const height = computeNodeHeight(node);
@@ -57,6 +60,7 @@ export function drawNode(
     y,
     width,
     NODE_LABEL_HEIGHT,
+    style.fontFamily,
     TYPE_LABEL_FONT_SIZE,
     colors.title.text,
     node.label || node.type.toUpperCase()
@@ -69,6 +73,7 @@ export function drawNode(
       nextAttributeY,
       keysWidth,
       ATTRIBUTE_HEIGHT,
+      style.fontFamily,
       ATTRIBUTE_FONT_SIZE,
       colors.attributes.key,
       key
@@ -79,6 +84,7 @@ export function drawNode(
       nextAttributeY,
       attributesWidth,
       ATTRIBUTE_HEIGHT,
+      style.fontFamily,
       ATTRIBUTE_FONT_SIZE,
       colors.attributes.value,
       value
@@ -90,23 +96,27 @@ export function drawNode(
 
 export function computeNodeWidth(
   ctx: CanvasRenderingContext2D,
+  style: TreeStyle,
   node: Node
 ): [nodeWidth: number, keysWidth: number, valuesWidth: number] {
   const label = node.label || node.type.toUpperCase();
   const attributes = node.attributes || [];
   const labelMinWidth =
-    measureText(ctx, TYPE_LABEL_FONT_SIZE, label) + TEXT_HORIZONTAL_PADDING * 2;
+    measureText(ctx, style.fontFamily, TYPE_LABEL_FONT_SIZE, label) +
+    TEXT_HORIZONTAL_PADDING * 2;
   const keysMinWidth =
     Math.max(
       0,
-      ...attributes.map(({ key }) => measureText(ctx, ATTRIBUTE_FONT_SIZE, key))
+      ...attributes.map(({ key }) =>
+        measureText(ctx, style.fontFamily, ATTRIBUTE_FONT_SIZE, key)
+      )
     ) +
     TEXT_HORIZONTAL_PADDING * 2;
   const valuesMinWidth =
     Math.max(
       0,
       ...attributes.map(({ value }) =>
-        measureText(ctx, ATTRIBUTE_FONT_SIZE, value)
+        measureText(ctx, style.fontFamily, ATTRIBUTE_FONT_SIZE, value)
       )
     ) +
     TEXT_HORIZONTAL_PADDING * 2;

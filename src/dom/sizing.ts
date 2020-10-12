@@ -1,4 +1,5 @@
 import { Node } from "../data/tree-node";
+import { TreeStyle } from "../design/style";
 import {
   computeHeight,
   computeWidth,
@@ -14,12 +15,14 @@ export function computeIdealViewportDimensions(
     maxWidth: number;
     maxHeight?: number;
     expandHorizontally: boolean;
+    style: TreeStyle;
   }
 ): [width: number, height: number, x: number, y: number, scale: number] {
   const treeHeight = Math.max(0, ...trees.map(computeHeight));
   let width = options.maxWidth;
   const treeWidth = trees.reduce(
-    (acc, tree) => acc + computeWidth(ctx, tree) + HORIZONTAL_TREE_SPACING,
+    (acc, tree) =>
+      acc + computeWidth(ctx, options.style, tree) + HORIZONTAL_TREE_SPACING,
     HORIZONTAL_TREE_SPACING
   );
   const idealHeight = (width / treeWidth) * treeHeight;

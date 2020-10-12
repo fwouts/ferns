@@ -1,4 +1,4 @@
-import { TreeColors } from "../design/colors";
+import { TreeStyle } from "../design/style";
 import { drawCurvedPath } from "./elements/curved-path";
 import { drawText } from "./elements/text";
 import { ProjectedRenderingContext2D } from "./viewport/projected-context";
@@ -22,7 +22,7 @@ export const CHILDREN_VERTICAL_SPACING =
 
 export function drawArrow(
   ctx: ProjectedRenderingContext2D,
-  colors: TreeColors,
+  style: TreeStyle,
   fromX: number,
   fromY: number,
   toX: number[],
@@ -32,7 +32,7 @@ export function drawArrow(
   const centerX = toX[0] + (toX[toX.length - 1] - toX[0]) / 2;
   ctx.set({
     lineJoin: "bevel",
-    strokeStyle: colors.arrow,
+    strokeStyle: style.colors.arrow,
     lineWidth: ARROW_THICKNESS,
   });
   ctx.beginPath();
@@ -66,8 +66,9 @@ export function drawArrow(
       fromY + ARROW_TOP_HEIGHT,
       ARROW_LABEL_WIDTH,
       ARROW_LABEL_HEIGHT,
+      style.fontFamily,
       ARROW_LABEL_FONT_SIZE,
-      colors.arrowLabel,
+      style.colors.arrowLabel,
       label
     );
   } else {

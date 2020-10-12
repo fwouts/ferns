@@ -1,4 +1,4 @@
-import { DEFAULT_COLORS, TreeColors } from "./design/colors";
+import { TreeStyle, withDefaults } from "./design/style";
 import { renderTreeElement, TreeRenderingOptions } from "./dom/dom-renderer";
 import { computeIdealViewportDimensions } from "./dom/sizing";
 import { render } from "./drawing/renderer";
@@ -97,10 +97,11 @@ export const Renderer = {
       code: string;
       maxWidth: number;
       maxHeight?: number;
-      colors?: TreeColors;
+      style?: Partial<TreeStyle>;
     }
   ) => {
     const trees = convert(options.code);
+    const style = withDefaults(options.style);
     const [
       width,
       height,
@@ -114,11 +115,12 @@ export const Renderer = {
         maxWidth: options.maxWidth,
         maxHeight: options.maxHeight,
         expandHorizontally: false,
+        style,
       }
     );
     const { ctx, save } = createRenderingContext(width, height);
     const viewport = new Viewport(width, height, startX, startY, scale);
-    render(ctx, options.colors || DEFAULT_COLORS, viewport, trees);
+    render(ctx, style, viewport, trees);
     return save();
   },
 };

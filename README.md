@@ -75,7 +75,7 @@ const buffer = Renderer.render(
 
 ## Dependencies
 
-This package doesn't have any runtime dependencies, other than the Roboto font. Note that the font should be loaded before you render.
+This package doesn't have any runtime dependencies, other than the Roboto font (which you can override). Note that the font should be loaded before you render.
 
 ## Acknowledgements
 

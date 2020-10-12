@@ -1,6 +1,7 @@
 import { createCanvas } from "canvas";
 import { toMatchImageSnapshot } from "jest-image-snapshot";
 import { Renderer } from "..";
+import { TreeStyle } from "../design/style";
 
 expect.extend({ toMatchImageSnapshot });
 
@@ -62,6 +63,62 @@ describe("Renderer", () => {
     expect(rendered).toMatchImageSnapshot();
   });
 
+  it("renders another font", () => {
+    const rendered = renderCanvas(
+      `
+    abc
+    `,
+      {
+        fontFamily: "Times New Roman",
+      }
+    );
+    expect(rendered).toMatchImageSnapshot();
+  });
+
+  it("renders custom colors", () => {
+    const rendered = renderCanvas(
+      `
+    root
+      key = value
+      -- arrow -->
+        custom
+          key = value
+    `,
+      {
+        colors: {
+          background: "#f00",
+          arrow: "#00f",
+          arrowLabel: "#000",
+          nodes: {
+            custom: {
+              title: {
+                background: "#000",
+                text: "#fff",
+              },
+              attributes: {
+                background: "#000",
+                key: "#fff",
+                value: "#fff",
+              },
+            },
+          },
+          nodeFallback: {
+            title: {
+              background: "#f8a",
+              text: "#000",
+            },
+            attributes: {
+              background: "#f33",
+              key: "#0f0",
+              value: "#8f8",
+            },
+          },
+        },
+      }
+    );
+    expect(rendered).toMatchImageSnapshot();
+  });
+
   it("does something", () => {
     const rendered = renderCanvas(`
     a
@@ -82,7 +139,7 @@ describe("Renderer", () => {
   });
 });
 
-function renderCanvas(code: string) {
+function renderCanvas(code: string, style?: Partial<TreeStyle>) {
   return Renderer.render(
     (width, height) => {
       const canvas = createCanvas(width, height);
@@ -94,6 +151,7 @@ function renderCanvas(code: string) {
     {
       code,
       maxWidth: MAX_WIDTH,
+      style,
     }
   );
 }
