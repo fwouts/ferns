@@ -1,14 +1,14 @@
 import { createCanvas } from "canvas";
 import { toMatchImageSnapshot } from "jest-image-snapshot";
 import { DEFAULT_COLORS } from "../design/colors";
+import { computeIdealViewportDimensions } from "../dom/sizing";
 import { convert } from "../text/convert";
 import { render } from "./renderer";
-import { computeHeight, computeWidth, HORIZONTAL_TREE_SPACING } from "./tree";
 import { Viewport } from "./viewport/viewport";
 
 expect.extend({ toMatchImageSnapshot });
 
-const RENDER_WIDTH = 1600;
+const MAX_WIDTH = 1600;
 
 describe("renderer", () => {
   it("renders a single node", () => {
@@ -89,23 +89,16 @@ describe("renderer", () => {
 function renderCanvas(code: string): Buffer {
   const emptyCanvas = createCanvas(0, 0);
   const trees = convert(code);
-  const width = trees.reduce(
-    (acc, tree) =>
-      acc +
-      computeWidth(emptyCanvas.getContext("2d"), tree) +
-      HORIZONTAL_TREE_SPACING,
-    HORIZONTAL_TREE_SPACING
+  const [width, height, startX, startY, scale] = computeIdealViewportDimensions(
+    emptyCanvas.getContext("2d"),
+    trees,
+    {
+      maxWidth: MAX_WIDTH,
+      expandHorizontally: false,
+    }
   );
-  const height = Math.max(0, ...trees.map(computeHeight));
-  const renderHeight = (RENDER_WIDTH / width) * height;
-  const canvas = createCanvas(RENDER_WIDTH, renderHeight);
-  const viewport = new Viewport(
-    RENDER_WIDTH,
-    renderHeight,
-    0,
-    0,
-    width / RENDER_WIDTH
-  );
+  const canvas = createCanvas(width, height);
+  const viewport = new Viewport(width, height, startX, startY, scale);
   const ctx = canvas.getContext("2d");
   render(ctx, DEFAULT_COLORS, viewport, trees);
   return canvas.toBuffer();

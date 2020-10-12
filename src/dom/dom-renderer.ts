@@ -1,5 +1,6 @@
 import { DEFAULT_COLORS, TreeColors } from "../design/colors";
 import { render } from "../drawing/renderer";
+import { computeHeight } from "../drawing/tree";
 import { Viewport } from "../drawing/viewport/viewport";
 import { convert } from "../text/convert";
 import { replaceContainer } from "./container";
@@ -41,12 +42,15 @@ async function renderTreeAsync(
   const colors = options.colors || DEFAULT_COLORS;
   const canvas = document.createElement("canvas");
   const ctx = get2DContext(canvas);
+  const treeHeight = Math.max(0, ...trees.map(computeHeight));
   const [width, height, startX, startY, scale] = computeIdealViewportDimensions(
-    container,
     ctx,
     trees,
-    options.maxWidth,
-    options.maxHeight
+    {
+      maxWidth: options.maxWidth || container.getBoundingClientRect().width,
+      maxHeight: options.maxHeight || treeHeight,
+      expandHorizontally: true,
+    }
   );
   canvas.style.width = `${width}px`;
   canvas.style.height = `${height}px`;
