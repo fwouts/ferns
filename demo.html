@@ -13,17 +13,35 @@
       });
     </script>
     <script type="module">
-      import { renderAllTrees } from "./index.js";
+      import {
+        renderSingleTree,
+        renderAllTrees,
+      } from "https://unpkg.com/ferns@0.0.3/dist/index.js";
 
-      window.addEventListener("load", () =>
+      window.addEventListener("load", () => {
         renderAllTrees({
           zoomable: true,
           draggable: true,
-        })
-      );
+        });
+
+        renderSingleTree(document.getElementById("single-tree-example"), {
+          code: `
+          a
+            -- arrow -->
+              b
+              c
+          `,
+          zoomable: true,
+          draggable: true,
+        });
+      });
     </script>
   </head>
   <body>
+    <!--
+      Any element with the class "fern-tree" will be automatically converted
+      when calling renderAllTrees().
+    -->
     <pre class="fern-tree">
         ferns
           --is-->
@@ -34,5 +52,10 @@
               -->
                 library
     </pre>
+
+    <!--
+       You can also call renderSingleTree(element) for more control.
+    -->
+    <div id="single-tree-example"></div>
   </body>
 </html>
