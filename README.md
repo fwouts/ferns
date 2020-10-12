@@ -2,6 +2,8 @@
 
 [![Screenshot](./screenshot.png)](https://codesandbox.io/s/competent-resonance-hoeeu?file=/index.html)
 
+[See it live on CodeSandbox](https://codesandbox.io/s/competent-resonance-hoeeu?file=/index.html)
+
 ## How to use
 
 You'll need to add the `ferns` package with `yarn` or `npm`.
