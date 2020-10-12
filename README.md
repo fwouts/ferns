@@ -8,6 +8,8 @@
 
 You'll need to add the `ferns` package with `yarn` or `npm`.
 
+### Browser rendering
+
 Create your trees with the special `"ferns-tree"` class name:
 
 ```html
@@ -24,12 +26,14 @@ a
 </pre>
 ```
 
-Finally, invoke `renderAllTrees()` in the browser.
+Finally, invoke `DOM.makeFerns()` in the browser.
 
-Alternatively, you can invoke `renderSingleTree()` and pass your tree code directly:
+Alternatively, you can invoke `DOM.makeSingleFern()` and pass your tree code directly:
 
 ```typescript
-renderSingleTree(containerElement, {
+import { DOM } from 'ferns';
+
+DOM.makeSingleFern((containerElement, {
   code: `
     a
       -- arrow -->
@@ -39,6 +43,34 @@ renderSingleTree(containerElement, {
   zoomable: true,
   draggable: true,
 });
+```
+
+## Server rendering
+
+You can render a fern to PNG (or SVG, or PDF) in Node using the `canvas` package:
+
+```typescript
+import { createCanvas } from "canvas";
+import { Renderer } from "ferns";
+
+const buffer = Renderer.render(
+  (width, height) => {
+    const canvas = createCanvas(width, height);
+    return {
+      ctx: canvas.getContext("2d"),
+      save: () => canvas.toBuffer(),
+    };
+  },
+  {
+    code: `
+    a
+      -- arrow -->
+        b
+        c
+    `,
+    maxWidth: 600,
+  }
+);
 ```
 
 ## Dependencies
