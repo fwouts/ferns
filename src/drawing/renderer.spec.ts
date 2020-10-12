@@ -1,16 +1,12 @@
 import { createCanvas } from "canvas";
 import { toMatchImageSnapshot } from "jest-image-snapshot";
-import { DEFAULT_COLORS } from "../design/colors";
-import { computeIdealViewportDimensions } from "../dom/sizing";
-import { convert } from "../text/convert";
-import { render } from "./renderer";
-import { Viewport } from "./viewport/viewport";
+import { Renderer } from "..";
 
 expect.extend({ toMatchImageSnapshot });
 
 const MAX_WIDTH = 1600;
 
-describe("renderer", () => {
+describe("Renderer", () => {
   it("renders a single node", () => {
     const rendered = renderCanvas(`
     a
@@ -86,20 +82,18 @@ describe("renderer", () => {
   });
 });
 
-function renderCanvas(code: string): Buffer {
-  const emptyCanvas = createCanvas(0, 0);
-  const trees = convert(code);
-  const [width, height, startX, startY, scale] = computeIdealViewportDimensions(
-    emptyCanvas.getContext("2d"),
-    trees,
+function renderCanvas(code: string) {
+  return Renderer.render(
+    (width, height) => {
+      const canvas = createCanvas(width, height);
+      return {
+        ctx: canvas.getContext("2d"),
+        save: () => canvas.toBuffer(),
+      };
+    },
     {
+      code,
       maxWidth: MAX_WIDTH,
-      expandHorizontally: false,
     }
   );
-  const canvas = createCanvas(width, height);
-  const viewport = new Viewport(width, height, startX, startY, scale);
-  const ctx = canvas.getContext("2d");
-  render(ctx, DEFAULT_COLORS, viewport, trees);
-  return canvas.toBuffer();
 }

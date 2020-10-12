@@ -13,18 +13,15 @@
       });
     </script>
     <script type="module">
-      import {
-        renderSingleTree,
-        renderAllTrees,
-      } from "https://unpkg.com/ferns@0.0.3/dist/index.js";
+      import { DOM } from "https://unpkg.com/ferns@0.0.5/dist/index.js";
 
       window.addEventListener("load", () => {
-        renderAllTrees({
+        DOM.makeFerns({
           zoomable: true,
           draggable: true,
         });
 
-        renderSingleTree(document.getElementById("single-tree-example"), {
+        DOM.makeSingleFern(document.getElementById("single-tree-example"), {
           code: `
           a
             -- arrow -->

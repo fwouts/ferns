@@ -10,7 +10,6 @@ import { computeIdealViewportDimensions } from "./sizing";
 import { enableZooming } from "./zooming";
 
 export interface TreeRenderingOptions {
-  code?: string;
   maxWidth?: number;
   maxHeight?: number;
   draggable?: boolean;
@@ -21,7 +20,7 @@ export interface TreeRenderingOptions {
 
 export function renderTreeElement(
   container: Element,
-  options: TreeRenderingOptions = {}
+  options: TreeRenderingOptions & { code?: string } = {}
 ) {
   const code = options.code || container.innerHTML;
   renderTreeAsync(container, code, options).catch((e) =>
