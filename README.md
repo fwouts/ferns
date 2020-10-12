@@ -44,3 +44,7 @@ renderSingleTree(containerElement, {
 ## Dependencies
 
 This package doesn't have any runtime dependencies, other than the Roboto font. Note that the font should be loaded before you render.
+
+## Acknowledgements
+
+This was inspired by the amazing [Mermaid](https://mermaid-js.github.io/mermaid/).
