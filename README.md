@@ -2,7 +2,7 @@
 
 [![Screenshot](./screenshot.png)](https://codesandbox.io/s/competent-resonance-hoeeu?file=/index.html)
 
-[See it live on CodeSandbox](https://codesandbox.io/s/competent-resonance-hoeeu?file=/index.html)
+[Try editing the tree live on CodeSandbox](https://codesandbox.io/s/competent-resonance-hoeeu?file=/index.html)
 
 ## How to use
 
