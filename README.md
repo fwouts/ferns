@@ -1,6 +1,6 @@
 # Ferns
 
-[![Screenshot](./screenshot.png)](https://codesandbox.io/s/competent-resonance-hoeeu?file=/index.html)
+[![Screenshot](https://github.com/fwouts/ferns/raw/master/screenshot.png)](https://codesandbox.io/s/competent-resonance-hoeeu?file=/index.html)
 
 [Try editing the tree live on CodeSandbox](https://codesandbox.io/s/competent-resonance-hoeeu?file=/index.html)
 
