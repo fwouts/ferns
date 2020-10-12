@@ -26,14 +26,20 @@ a
 </pre>
 ```
 
-Finally, invoke `DOM.makeFerns()` in the browser.
+Finally, invoke `DOM.makeFerns()` in the browser:
+
+```typescript
+import { DOM } from "ferns";
+
+DOM.makeFerns();
+```
 
 Alternatively, you can invoke `DOM.makeSingleFern()` and pass your tree code directly:
 
 ```typescript
-import { DOM } from 'ferns';
+import { DOM } from "ferns";
 
-DOM.makeSingleFern((containerElement, {
+DOM.makeSingleFern(containerElement, {
   code: `
     a
       -- arrow -->
@@ -75,7 +81,17 @@ const buffer = Renderer.render(
 
 ## Dependencies
 
-This package doesn't have any runtime dependencies, other than the Roboto font (which you can override). Note that the font should be loaded before you render.
+This package doesn't have any runtime dependencies. As of v0.0.7, it's 3.6 kB minified + gzipped.
+
+It does use the Roboto font, but you can override it by specifying `fontFamily` in the options:
+
+```typescript
+DOM.makeFerns({
+  style: {
+    fontFamily: "your preferred font",
+  },
+});
+```
 
 ## Acknowledgements
 
