@@ -1,6 +1,6 @@
 import { Node } from "../data/tree-node";
 
-export interface TreeColors {
+export type TreeColors = {
   background: Color;
   arrow: Color;
   arrowLabel: Color;
@@ -8,9 +8,9 @@ export interface TreeColors {
     [type: string]: NodeColors;
   };
   nodeFallback: NodeColors;
-}
+};
 
-export interface NodeColors {
+export type NodeColors = {
   title: {
     background: Color;
     text: Color;
@@ -20,7 +20,7 @@ export interface NodeColors {
     key: Color;
     value: Color;
   };
-}
+};
 
 export type Color = string;
 

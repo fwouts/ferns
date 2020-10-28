@@ -1,3 +1,4 @@
+import { merge, RecursivePartial } from "../types.ts/recursive-partial";
 import { TreeColors } from "./colors";
 
 export interface TreeStyle {
@@ -24,9 +25,12 @@ const DEFAULT_COLORS: TreeColors = {
 
 const DEFAULT_FONT = "Roboto";
 
-export function withDefaults(style?: Partial<TreeStyle>) {
-  return {
-    colors: style?.colors || DEFAULT_COLORS,
-    fontFamily: style?.fontFamily || DEFAULT_FONT,
-  };
+export function withDefaults(style?: RecursivePartial<TreeStyle>) {
+  return merge(
+    {
+      colors: DEFAULT_COLORS,
+      fontFamily: DEFAULT_FONT,
+    },
+    style
+  );
 }

@@ -4,6 +4,7 @@ import { computeIdealViewportDimensions } from "./dom/sizing";
 import { render } from "./drawing/renderer";
 import { Viewport } from "./drawing/viewport/viewport";
 import { convert } from "./text/convert";
+import { RecursivePartial } from "./types.ts/recursive-partial";
 
 /**
  * DOM-related API. Only available in web browsers.
@@ -97,7 +98,7 @@ export const Renderer = {
       code: string;
       maxWidth: number;
       maxHeight?: number;
-      style?: Partial<TreeStyle>;
+      style?: RecursivePartial<TreeStyle>;
     }
   ) => {
     const trees = convert(options.code);

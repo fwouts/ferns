@@ -2,6 +2,7 @@ import { createCanvas } from "canvas";
 import { toMatchImageSnapshot } from "jest-image-snapshot";
 import { Renderer } from "..";
 import { TreeStyle } from "../design/style";
+import { RecursivePartial } from "../types.ts/recursive-partial";
 
 expect.extend({ toMatchImageSnapshot });
 
@@ -139,7 +140,7 @@ describe("Renderer", () => {
   });
 });
 
-function renderCanvas(code: string, style?: Partial<TreeStyle>) {
+function renderCanvas(code: string, style?: RecursivePartial<TreeStyle>) {
   return Renderer.render(
     (width, height) => {
       const canvas = createCanvas(width, height);
