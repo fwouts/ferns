@@ -6,10 +6,14 @@ import { Viewport } from "./viewport/viewport";
 
 export function render(
   ctx: CanvasRenderingContext2D,
+  width: number,
+  height: number,
   style: TreeStyle,
   viewport: Viewport,
   trees: Node[]
 ) {
+  ctx.fillStyle = style.colors.background;
+  ctx.fillRect(0, 0, width, height);
   const projectedContext = new ProjectedRenderingContext2D(ctx, viewport);
   let x = HORIZONTAL_TREE_SPACING;
   for (const tree of trees) {

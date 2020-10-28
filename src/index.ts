@@ -121,7 +121,7 @@ export const Renderer = {
     );
     const { ctx, save } = createRenderingContext(width, height);
     const viewport = new Viewport(width, height, startX, startY, scale);
-    render(ctx, style, viewport, trees);
+    render(ctx, width, height, style, viewport, trees);
     return save();
   },
 };

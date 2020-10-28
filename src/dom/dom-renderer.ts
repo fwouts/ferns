@@ -76,9 +76,7 @@ async function renderTreeAsync(
 
   function rerender(viewport: Viewport) {
     currentViewport = viewport;
-    ctx.fillStyle = style.colors.background;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    render(ctx, style, viewport, trees);
+    render(ctx, canvas.width, canvas.height, style, viewport, trees);
   }
 }
 
