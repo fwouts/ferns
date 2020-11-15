@@ -17,12 +17,16 @@ export function drawTree(
   y: number,
   tree: Node
 ): number {
-  const allocatedWidth = computeWidth(ctx.rawContext, style, tree);
+  const [allocatedWidth, childrenShift] = computeWidth(
+    ctx.rawContext,
+    style,
+    tree
+  );
   const [nodeWidth] = computeNodeWidth(ctx.rawContext, style, tree);
   const nodeX = x + (allocatedWidth - nodeWidth) / 2;
   const height = drawNode(ctx, style, nodeX, y, tree);
   let childrenY = y + height + CHILDREN_VERTICAL_SPACING;
-  let nextChildX = x;
+  let nextChildX = x + childrenShift;
   for (const group of tree.children || []) {
     const childrenX: number[] = [];
     for (const child of group.nodes) {
@@ -49,17 +53,16 @@ export function computeWidth(
   ctx: CanvasRenderingContext2D,
   style: TreeStyle,
   tree: Node
-): number {
+): [totalWidth: number, childrenShift: number] {
   const allChildren = (tree.children || []).map((group) => group.nodes).flat();
   const [nodeWidth] = computeNodeWidth(ctx, style, tree);
-  return Math.max(
-    nodeWidth,
-    allChildren.reduce(
-      (acc, child) =>
-        acc + computeWidth(ctx, style, child) + HORIZONTAL_NODE_SPACING,
-      -HORIZONTAL_NODE_SPACING
-    )
+  const childrenWidth = allChildren.reduce(
+    (acc, child) =>
+      acc + computeWidth(ctx, style, child)[0] + HORIZONTAL_NODE_SPACING,
+    -HORIZONTAL_NODE_SPACING
   );
+  const totalWidth = Math.max(nodeWidth, childrenWidth);
+  return [totalWidth, (totalWidth - childrenWidth) / 2];
 }
 
 export function computeHeight(tree: Node): number {
