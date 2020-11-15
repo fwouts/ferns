@@ -4,13 +4,13 @@ import { drawText } from "./elements/text";
 import { ProjectedRenderingContext2D } from "./viewport/projected-context";
 
 const ARROW_THICKNESS = 2;
-const ARROW_TOP_HEIGHT = 100;
-const ARROW_TOP_STRAIGHT = 30;
-const ARROW_CURVE_RADIUS = 30;
+const ARROW_TOP_HEIGHT = 60;
+const ARROW_TOP_STRAIGHT = 10;
+const ARROW_CURVE_RADIUS = 20;
 const ARROW_LABEL_WIDTH = 100;
 const ARROW_LABEL_HEIGHT = 30;
 const ARROW_LABEL_STRAIGHT = 10;
-const ARROW_BOTTOM_HEIGHT = 100;
+const ARROW_BOTTOM_HEIGHT = 70;
 const ARROW_LABEL_FONT_SIZE = 18;
 const ARROW_HEAD_HEIGHT = 5;
 const ARROW_HEAD_WIDTH = 10;
