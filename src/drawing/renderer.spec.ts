@@ -120,21 +120,32 @@ describe("Renderer", () => {
     expect(rendered).toMatchImageSnapshot();
   });
 
-  it("does something", () => {
+  it("renders complex trees in a readable way", () => {
     const rendered = renderCanvas(`
-    a
-      name = root
-      --entities-->
-        a
-        b
-        c
-      --folders-->
-        b
-          --files-->
-            file 1
-            file 2
-            file 3
-        c
+block
+  --entities-->
+    entity
+      name = a
+    entity
+      name = b
+  --instructions-->
+    assignment
+      --to-->
+        0⬆0
+      --value-->
+        1
+    block
+      --instructions-->
+        assignment
+          --to-->
+            1⬆0
+          --value-->
+            2
+        assignment
+          --to-->
+            0⬆0
+          --value-->
+            3
     `);
     expect(rendered).toMatchImageSnapshot();
   });
