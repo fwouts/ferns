@@ -42,6 +42,7 @@ export function drawTree(
         y + height,
         childrenX,
         childrenY,
+        tree.children?.length === 1,
         group.label
       );
     }

@@ -27,9 +27,12 @@ export function drawArrow(
   fromY: number,
   toX: number[],
   toY: number,
+  straightLine: boolean,
   label?: string
 ) {
-  const centerX = toX[0] + (toX[toX.length - 1] - toX[0]) / 2;
+  const centerX = straightLine
+    ? fromX
+    : toX[0] + (toX[toX.length - 1] - toX[0]) / 2;
   ctx.set({
     lineJoin: "bevel",
     strokeStyle: style.colors.arrow,
