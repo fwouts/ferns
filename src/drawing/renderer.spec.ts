@@ -149,6 +149,32 @@ block
     `);
     expect(rendered).toMatchImageSnapshot();
   });
+
+  it("aligns large and small nodes correctly", () => {
+    const rendered = renderCanvas(`
+block
+  --instructions-->
+    block
+      --instructions-->
+        variable declaration
+          id = 100
+          name = a
+        assignment
+          id = 100
+          --value-->
+            1
+    block
+      --instructions-->
+        variable declaration
+          id = 100
+          name = a
+        assignment
+          id = 100
+          --value-->
+            2
+    `);
+    expect(rendered).toMatchImageSnapshot();
+  });
 });
 
 function renderCanvas(code: string, style?: RecursivePartial<TreeStyle>) {

@@ -12,7 +12,7 @@ const NODE_BORDER_RADIUS = 10;
 const TYPE_LABEL_FONT_SIZE = 22;
 const ATTRIBUTE_HEIGHT = 34;
 const ATTRIBUTE_FONT_SIZE = 18;
-const TEXT_HORIZONTAL_PADDING = 8;
+const TEXT_HORIZONTAL_PADDING = 16;
 
 /**
  * Draws a particular node and returns its height.
@@ -99,7 +99,7 @@ export function computeNodeWidth(
   style: TreeStyle,
   node: Node
 ): [nodeWidth: number, keysWidth: number, valuesWidth: number] {
-  const label = node.label || node.type.toUpperCase();
+  const label = node.label || node.type;
   const attributes = node.attributes || [];
   const labelMinWidth =
     measureText(ctx, style.fontFamily, TYPE_LABEL_FONT_SIZE, label) +
