@@ -5,13 +5,13 @@ import { drawRectangle } from "./elements/rect";
 import { drawText, measureText } from "./elements/text";
 import { ProjectedRenderingContext2D } from "./viewport/projected-context";
 
-const NODE_LABEL_HEIGHT = 30;
+const NODE_LABEL_HEIGHT = 40;
 const NODE_WIDTH_LARGE = 170;
 const NODE_WIDTH_SMALL = 120;
 const NODE_BORDER_RADIUS = 10;
-const TYPE_LABEL_FONT_SIZE = 12;
-const ATTRIBUTE_HEIGHT = 30;
-const ATTRIBUTE_FONT_SIZE = 14;
+const TYPE_LABEL_FONT_SIZE = 22;
+const ATTRIBUTE_HEIGHT = 34;
+const ATTRIBUTE_FONT_SIZE = 18;
 const TEXT_HORIZONTAL_PADDING = 8;
 
 /**
@@ -63,7 +63,7 @@ export function drawNode(
     style.fontFamily,
     TYPE_LABEL_FONT_SIZE,
     colors.title.text,
-    node.label || node.type.toUpperCase()
+    node.label || node.type
   );
   let nextAttributeY = y + NODE_LABEL_HEIGHT;
   for (const { key, value } of attributes) {
