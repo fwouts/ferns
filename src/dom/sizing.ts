@@ -7,6 +7,7 @@ import {
 } from "../drawing/tree";
 
 const INITIAL_SCALE = 0.95;
+const MIN_TREE_WIDTH = 700;
 
 export function computeIdealViewportDimensions(
   ctx: CanvasRenderingContext2D,
@@ -25,17 +26,18 @@ export function computeIdealViewportDimensions(
       acc + computeWidth(ctx, options.style, tree) + HORIZONTAL_TREE_SPACING,
     -HORIZONTAL_TREE_SPACING
   );
-  const idealHeight = (width / treeWidth) * treeHeight;
+  const totalWidth = Math.max(MIN_TREE_WIDTH, treeWidth);
+  const idealHeight = (width / totalWidth) * treeHeight;
   const height = options.maxHeight
     ? Math.min(options.maxHeight, idealHeight)
     : idealHeight;
   const scale = treeHeight / height / INITIAL_SCALE;
-  const minWidth = (height / treeHeight) * treeWidth;
   if (!options.expandHorizontally) {
-    width = minWidth;
+    width = (height / treeHeight) * totalWidth;
   }
   // Center everything nicely.
-  const x = ((minWidth * INITIAL_SCALE - width) / 2) * scale;
+  const x =
+    (((height / treeHeight) * treeWidth * INITIAL_SCALE - width) / 2) * scale;
   const y = (treeHeight * (1 - 1 / INITIAL_SCALE)) / 2;
   return [width, height, x, y, scale];
 }
