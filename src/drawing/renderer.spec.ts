@@ -188,6 +188,7 @@ function renderCanvas(code: string, style?: RecursivePartial<TreeStyle>) {
     },
     {
       code,
+      minTreeWidth: 700,
       maxWidth: MAX_WIDTH,
       style,
     }

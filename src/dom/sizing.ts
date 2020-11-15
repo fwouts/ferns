@@ -7,12 +7,12 @@ import {
 } from "../drawing/tree";
 
 const INITIAL_SCALE = 0.95;
-const MIN_TREE_WIDTH = 700;
 
 export function computeIdealViewportDimensions(
   ctx: CanvasRenderingContext2D,
   trees: Node[],
   options: {
+    minTreeWidth?: number;
     maxWidth: number;
     maxHeight?: number;
     expandHorizontally: boolean;
@@ -26,7 +26,7 @@ export function computeIdealViewportDimensions(
       acc + computeWidth(ctx, options.style, tree)[0] + HORIZONTAL_TREE_SPACING,
     -HORIZONTAL_TREE_SPACING
   );
-  const totalWidth = Math.max(MIN_TREE_WIDTH, treeWidth);
+  const totalWidth = Math.max(options.minTreeWidth || 0, treeWidth);
   const idealHeight = (width / totalWidth) * treeHeight;
   const height = options.maxHeight
     ? Math.min(options.maxHeight, idealHeight)

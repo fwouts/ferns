@@ -96,6 +96,7 @@ export const Renderer = {
     },
     options: {
       code: string;
+      minTreeWidth?: number;
       maxWidth: number;
       maxHeight?: number;
       style?: RecursivePartial<TreeStyle>;
@@ -113,6 +114,7 @@ export const Renderer = {
       createRenderingContext(0, 0).ctx,
       trees,
       {
+        minTreeWidth: options.minTreeWidth,
         maxWidth: options.maxWidth,
         maxHeight: options.maxHeight,
         expandHorizontally: false,

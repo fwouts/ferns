@@ -10,6 +10,7 @@ import { computeIdealViewportDimensions } from "./sizing";
 import { enableZooming } from "./zooming";
 
 export interface TreeRenderingOptions {
+  minTreeWidth?: number;
   maxWidth?: number;
   maxHeight?: number;
   draggable?: boolean;
@@ -46,6 +47,7 @@ async function renderTreeAsync(
     ctx,
     trees,
     {
+      minTreeWidth: options.minTreeWidth,
       maxWidth: options.maxWidth || container.getBoundingClientRect().width,
       maxHeight: options.maxHeight || treeHeight,
       expandHorizontally: true,
