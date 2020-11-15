@@ -23,7 +23,7 @@ export function computeIdealViewportDimensions(
   const treeWidth = trees.reduce(
     (acc, tree) =>
       acc + computeWidth(ctx, options.style, tree) + HORIZONTAL_TREE_SPACING,
-    HORIZONTAL_TREE_SPACING
+    -HORIZONTAL_TREE_SPACING
   );
   const idealHeight = (width / treeWidth) * treeHeight;
   const height = options.maxHeight

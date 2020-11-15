@@ -15,7 +15,7 @@ export function render(
   ctx.fillStyle = style.colors.background;
   ctx.fillRect(0, 0, width, height);
   const projectedContext = new ProjectedRenderingContext2D(ctx, viewport);
-  let x = HORIZONTAL_TREE_SPACING;
+  let x = 0;
   for (const tree of trees) {
     x +=
       drawTree(projectedContext, style, x, 0, tree) + HORIZONTAL_TREE_SPACING;
