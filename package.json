@@ -1,6 +1,6 @@
 {
   "name": "ferns",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "author": "Francois Wouts",
   "license": "MIT",
   "main": "dist/index.js",
